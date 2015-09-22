@@ -1,0 +1,19 @@
+demoHyperMedia:
+  image: jdubois/jhipster-docker:latest
+  volumes:
+    - .:/hyper-media
+  ports:
+    - "3333:3333"
+    - "3000:3000"
+    - "3001:3001"
+    - "4022:22"
+  links:
+    - pgHyperMedia:postgres
+
+pgHyperMedia:
+  image: postgres:9.4.4
+  ports:
+    - "127.0.0.1:5432:5432"
+  volumes:
+    - $PWD/pgdata:/var/lib/prostgresql/data
+
