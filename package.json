@@ -37,6 +37,8 @@
     "jade-brunch": "^1.8.1",
     "javascript-brunch": "^1.7.1",
     "morgan": "^1.5.1",
-    "sass-brunch": "^1.8.10"
+    "sass-brunch": "^1.8.10",
+
+    "lodash":"3.10.1"
   }
 }

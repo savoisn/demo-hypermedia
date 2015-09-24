@@ -17,8 +17,7 @@ App.config([
   '$routeProvider'
   '$locationProvider'
 
-($rootScope, $routeProvider, $locationProvider, config, halClient) ->
-  $rootScope.apiRoot = halClient.$get('//api/');
+($routeProvider, $locationProvider, config) ->
   $routeProvider
 
     .when('/todo', {templateUrl: '/partials/todo.html'})

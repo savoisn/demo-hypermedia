@@ -9,10 +9,30 @@ angular.module('app.controllers', [])
   '$location'
   '$resource'
   '$rootScope'
-  'halClient'
+  'api'
 
-($scope, $location, $resource, $rootScope, halClient) ->
+($scope, $location, $resource, $rootScope, api) ->
 
+  $scope.reload = ->
+    api.load().then (data) ->
+      data.$get('todos')
+    .then (todo)->
+      if todo?
+        $scope.todos=todo.todos
+
+  $scope.reload()
+  $scope.$on 'reload_todos', (event, args)->
+    console.log 'event received '+args
+    if args is 0
+      $scope.reload()
+
+  $scope.todos = [
+    text: "learn angular"
+    done: true
+  ,
+    text: "build an angular app"
+    done: false
+  ]
   # Uses the url to determine if the selected
   # menu item should have the class active.
   $scope.$location = $location
@@ -33,6 +53,8 @@ angular.module('app.controllers', [])
       return 'active'
     else
       return ''
+
+
 ])
 
 .controller('MyCtrl1', [
@@ -51,23 +73,17 @@ angular.module('app.controllers', [])
 
 .controller('TodoCtrl', [
   '$scope'
+  'api'
 
-($scope) ->
-
-  $scope.todos = [
-    text: "learn angular"
-    done: true
-  ,
-    text: "build an angular app"
-    done: false
-  ]
+($scope,api) ->
 
   $scope.addTodo = ->
-    $scope.todos.push
-      text: $scope.todoText
-      done: false
-
-    $scope.todoText = ""
+    api.load().then (data) ->
+      data.$post('todo', null ,{text:$scope.todoText,done:false})
+    .then (todo)->
+      $scope.$emit 'reload_todos',0
+      console.log 'created'
+      $scope.todoText = ""
 
   $scope.remaining = ->
     count = 0
@@ -79,8 +95,14 @@ angular.module('app.controllers', [])
   $scope.archive = ->
     oldTodos = $scope.todos
     $scope.todos = []
+    asyncCounter=0
     angular.forEach oldTodos, (todo) ->
-      $scope.todos.push todo  unless todo.done
+      if todo.done
+        asyncCounter++
+        api.load().then (data) ->
+          data.$del('todo',{id:todo.id})
+        .then (todo)->
+          $scope.$emit 'reload_todos',--asyncCounter
 
 ])
 
