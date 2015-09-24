@@ -1,6 +1,7 @@
 'use strict'
 bodyParser = require 'body-parser'
 express = require 'express'
+hal = require 'express-hal'
 http = require 'http'
 logger = require 'morgan'
 Path = require 'path'
@@ -9,16 +10,53 @@ Path = require 'path'
 module.exports = (port, path, callback) ->
   console.log 'starting server'
   app = express()
+  app.use(hal.middleware)
   server = http.createServer(app)
   # Stockage en mémoire des entrées gérées via REST
   items = []
   # Middlewares de base : fichiers statiques, logs, champs de formulaire
-  app.use express.static(Path.join(__dirname, path))
+  console.log "serving path : "+path, Path.join(__dirname, '../'+path)
+  app.use express.static(Path.join(__dirname, '../'+path))
   app.use logger('dev')
   app.use bodyParser.urlencoded(extended: true)
   # GET `/items` -> JSON du tableau des entrées
-  app.get '/items2', (req, res) ->
-    res.json items
+  app.get '/items1', (req, res) ->
+    res.hal({
+      data:{monitem:{size:'large', type:'fake'}},
+      links:{
+        self:'/items1',
+        next:'items1?page=2',
+        find:{href: "/items1{?id}", templated: true}
+      }
+      embeds:{
+        "orders":[
+          {
+            data:{
+                total:    30.00,
+                currency: "USD",
+                status:   "shipped"
+            },
+            links: {
+                self:     "/orders/123",
+                basket:   "/baskets/98712",
+                customer: "/customers/7809"
+            }
+          },
+          {
+            data: {
+                total:    20.00,
+                currency: "USD",
+                status:   "processing"
+            },
+            links: {
+                self:     "/orders/124",
+                basket:   "/baskets/97213",
+                customer: "/customers/12369"
+            }
+          }
+        ]
+      }
+    })
     return
   app.get '/items', (req, res) ->
     res.json items

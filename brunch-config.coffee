@@ -7,3 +7,4 @@ module.exports = config:
     templates: joinTo: 'app.js'
   server:
     run: yes
+    path: 'server/api.coffee'
