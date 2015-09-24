@@ -1,9 +1,35 @@
 {
-  "name": "simple-brunch",
+  "name": "angular-brunch-seed",
+  "repo": "scotch/angular-brunch-seed",
   "version": "0.1.0",
-  "private": true,
-  "ignore": ["**/.*", "node_modules", "bower_components", "test", "tests"],
+  "main": "public/js/app.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
   "dependencies": {
-    "jquery": "1.*"
+    "console-polyfill": "~0.1.0",
+    "jquery": "~2.0.3",
+    "bootstrap-less": "~2.3.2",
+    "bootstrap-less-themes": "https://github.com/angular-brunch/bootstrap-less-themes.git",
+    "angular-bootstrap": "~0.5.0",
+    "angular": "1.2.5",
+    "angular-hal": "0.1.5",
+    "angular-sanitize": "1.2.5",
+    "angular-resource": "1.2.5",
+    "angular-route": "1.2.5",
+    "angular-cookies": "1.2.5",
+    "angular-mocks": "1.2.5"
+  },
+  "overrides": {
+    "bootstrap-less": {
+      "ignore": [
+        "*"
+      ]
+    },
+    "angular-mocks": {
+      "main": "README.md"
+    }
   }
 }

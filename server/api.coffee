@@ -20,7 +20,7 @@ module.exports = (port, path, callback) ->
   app.use logger('dev')
   app.use bodyParser.urlencoded(extended: true)
   # GET `/items` -> JSON du tableau des entrées
-  app.get '/items1', (req, res) ->
+  app.get 'api/items1', (req, res) ->
     res.hal({
       data:{monitem:{size:'large', type:'fake'}},
       links:{
@@ -58,11 +58,29 @@ module.exports = (port, path, callback) ->
       }
     })
     return
-  app.get '/items', (req, res) ->
+   app.get 'api/',(req,res) ->
+     res.json ({
+       "_links": {
+         self: {
+           "href": "/"
+         }
+         "todos": {
+           "templated": true,
+           "href": '/todos{?search}'
+         }
+         "todo": {
+           "templated": true,
+           "href": '/todo{/id}'
+         }
+       }
+     })
+     return
+
+  app.get 'api/items', (req, res) ->
     res.json items
     return
   # POST `/items` -> Ajout d’une entrée d’après le champ `title`
-  app.post '/items', (req, res) ->
+  app.post 'api/items', (req, res) ->
     item = (req.body.title or '').trim()
     if !item
       return res.status(400).end('Nope!')
