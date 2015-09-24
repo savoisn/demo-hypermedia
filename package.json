@@ -1,48 +1,20 @@
 {
-  "author": "Nicolas SAVOIS",
-  "name": "demo-hypermedia",
-  "description": "Package description",
-  "version": "0.0.1",
-  "homepage": "",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
+  "name": "simple-brunch",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "brunch build",
-    "start": "brunch watch --server",
-    "test": "brunch test"
+    "start": "nodemon bin/run.coffee",
+    "serve:api": "nodemon bin/run.coffee",
+    "serve:client": "brunch w -s"
   },
-  "dependencies": {
-    "express": "3.2.6",
-    "async": "*",
-    "cordell": "*",
-    "debug": "*",
-    "ansi-color": "*",
-    "growl": "*",
-    "date-utils": "*",
-
-    "jade": ">= 0.28",
-    "coffee-script": ">= 1.4",
-    "brunch": ">= 1.5 < 1.6",
-
-    "coffee-script-brunch": ">= 1.5 < 1.6",
-
-    "less-brunch": ">= 1.5 < 1.6",
-    "stylus-brunch": ">= 1.5 < 1.6",
-
-    "auto-reload-brunch": ">= 1.5 < 1.7",
-
-    "uglify-js-brunch": ">= 1.5 < 1.6",
-    "clean-css-brunch": ">= 1.5 < 1.6",
-
-    "bower-stylesheet-brunch": "git://github.com/angular-brunch/bower-stylesheet-brunch/#master",
-    "bower-javascript-brunch": "git://github.com/angular-brunch/bower-javascript-brunch/#master",
-    "bower-asserts-brunch": "git://github.com/angular-brunch/bower-assets-brunch/#master",
-    "bower": "~0.9.2",
-
-    "jade-angularjs-brunch": ">= 0.0.5 <= 0.1"
-
-   },
-  "devDependencies": {}
+  "devDependencies": {
+    "body-parser": "^1.12.0",
+    "brunch": "^1.8.3",
+    "coffee-script": "~1.9.0",
+    "express": "^4.12.2",
+    "jade-brunch": "^1.8.1",
+    "javascript-brunch": "^1.7.1",
+    "morgan": "^1.5.1",
+    "sass-brunch": "^1.8.10"
+  }
 }

@@ -12,6 +12,7 @@ node_modules
 
 _public
 node_modules/*
+bower_components/*
 npm-debug.log
 
 test/test-results.xml
@@ -27,6 +28,8 @@ vendor/bootstrap/
 vendor/console-polyfill/
 vendor/font-awesome/
 vendor/jquery/
+
+
 
 public/
 public/*
