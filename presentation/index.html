@@ -83,16 +83,44 @@ RESULT:   {"user_id":1,"name":"Chris Rivers", "nickname":"chris"}
 				</section>
 				<section>
 					<h2>The Problems</h2>
-					<p>Very hard to discover by itself</p>
-					<p>Force to write documentation for users to understand the API</p>
-					<p>Very HARD coupling with the apps that uses the API</p>
-					<p>Makes nearly impossible refactoring of the API itself</p>
+          <p>Client apps have to hardcode the URL</p>
+          <div class="fragment current-visible">
+				    <img data-src="img/maturity.png" alt="Down arrow">
+          </div>
+					<p class="fragment">Very HARD coupling with the apps that uses the API</p>
+					<p class="fragment">Force to write documentation when building</p>
+					<p class="fragment">RTFM when consuming</p>
+					<p class="fragment">Very hard to discover by itself</p>
+					<p class="fragment">Makes nearly impossible refactoring of the API itself</p>
 				</section>
 				<section>
-					<h2>The Solution</h2>
+					<h2>The Solution:</h2>
 					<h3>Hypermedia</h3>
-					<p>Hypermedia</p>
-
+          <div class="fragment">
+            <p>Use Semantics instead of URI</p>
+            <p>Speak like a human!</p>
+          </div>
+          <p class="fragment">Add metadata to data</p>
+          <ul>
+            <li class="fragment">links</p>
+            <li class="fragment">actions</p>
+            <li class="fragment">embended objects</p>
+            <li class="fragment">remote objects</p>
+          </ul>
+				</section>
+				<section>
+					<h2>Pluses</h2>
+          <p class="fragment">Consume instead of constructing</p>
+          <p class="fragment">Detect API change, new links and react to novelty</p>
+          <p class="fragment">In the end API can maintain the flow and Client only has to react to it</p>
+          <p class="fragment">Finally URL can change without breaking clients!!! </p>
+				</section>
+				<section>
+					<h2>Downs</h2>
+          <p class="fragment">Very new</p>
+          <p class="fragment">Complicated to see benefits</p>
+          <p class="fragment">Lake of tools</p>
+          <p class="fragment">Great Oppertunities! Let's build the hibernate of hateoas</p>
 				</section>
 				<!-- Example of nested vertical slides -->
 				<section>
