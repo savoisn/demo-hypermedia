@@ -6,6 +6,7 @@ http = require 'http'
 logger = require 'morgan'
 Path = require 'path'
 _ = require 'lodash'
+TodoService = require './services/todoService'
 # Notre fonction de démarrage serveur
 
 module.exports = (port, path, callback) ->
@@ -62,6 +63,7 @@ module.exports = (port, path, callback) ->
       }
     })
     return
+
   app.get '/api/',(req,res) ->
     res.json ({
       "_links": {
@@ -85,21 +87,25 @@ module.exports = (port, path, callback) ->
       id:1
       text:"first todo"
       done:false
+      user:235
     }
     {
       id:2
       text:"second todo"
       done:false
+      user:345
     }
     {
       id:3,
       text:"third todo"
       done:false
+      user:456
     }
     {
       id:4
       text:"forth todo"
       done:false
+      user:567
     }
   ]
 
@@ -118,14 +124,7 @@ module.exports = (port, path, callback) ->
     return
 
   app.get '/api/todos',(req,res) ->
-    res.json ({
-      "_links": {
-        self: {
-          "href": "/todos"
-        }
-      }
-      "todos":todos
-    })
+    res.hal TodoService.halTodos(todos)
     return
 
   app.post '/api/todo', (req, res) ->
